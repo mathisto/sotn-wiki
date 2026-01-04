@@ -1,0 +1,151 @@
+site_name: SOTN Decomp Wiki
+site_description: The definitive Symphony of the Night knowledge base - bridging game lore with decompiled source code
+site_url: https://sotn.xee.dev/wiki/
+repo_url: https://github.com/Xeeynamo/sotn-decomp
+repo_name: Xeeynamo/sotn-decomp
+edit_uri: ""
+
+docs_dir: docs
+
+theme:
+  name: material
+  custom_dir: overrides
+  language: en
+  
+  palette:
+    - scheme: tokyo-night
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+  
+  font:
+    text: Inter
+    code: JetBrains Mono
+  
+  icon:
+    repo: fontawesome/brands/github
+    logo: material/castle
+  
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
+  - tags:
+      tags_file: tags.md
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.betterem
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.smartsymbols
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - stylesheets/tokyo-night.css
+  - stylesheets/custom.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Xeeynamo/sotn-decomp
+    - icon: fontawesome/brands/discord
+      link: https://sotn-discord.xee.dev/
+  generator: false
+  status:
+    stub: Stub - needs content
+    basic: Basic info only
+    partial: Partially complete
+    complete: Complete
+    verified: Verified with code links
+
+nav:
+  - Home: index.md
+  - Progress: PROGRESS.md
+  
+  - Stages:
+    - stages/index.md
+    - Normal Castle:
+      - stages/normal/index.md
+    - Reverse Castle:
+      - stages/reverse/index.md
+  
+  - Enemies:
+    - enemies/index.md
+  
+  - Bosses:
+    - bosses/index.md
+  
+  - Items:
+    - items/index.md
+    - Weapons: items/weapons/index.md
+    - Armor: items/armor/index.md
+    - Accessories: items/accessories/index.md
+    - Consumables: items/consumables/index.md
+    - Relics: items/relics/index.md
+  
+  - Characters:
+    - characters/index.md
+  
+  - Mechanics:
+    - mechanics/index.md
+    - Familiars: mechanics/familiars/index.md
+  
+  - Speedrunning:
+    - speedrunning/index.md
+  
+  - Decompilation:
+    - decomp/index.md
+  
+  - Tags: tags.md

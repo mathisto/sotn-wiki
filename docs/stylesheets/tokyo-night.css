@@ -1,0 +1,234 @@
+/* Tokyo Night Theme for MkDocs Material */
+/* Based on https://github.com/enkia/tokyo-night-vscode-theme */
+
+:root {
+  /* Tokyo Night Storm palette */
+  --tn-bg: #24283b;
+  --tn-bg-dark: #1a1b26;
+  --tn-bg-highlight: #292e42;
+  --tn-terminal-black: #414868;
+  --tn-fg: #c0caf5;
+  --tn-fg-dark: #a9b1d6;
+  --tn-fg-gutter: #3b4261;
+  --tn-dark3: #545c7e;
+  --tn-comment: #565f89;
+  --tn-dark5: #737aa2;
+  --tn-blue0: #3d59a1;
+  --tn-blue: #7aa2f7;
+  --tn-cyan: #7dcfff;
+  --tn-blue1: #2ac3de;
+  --tn-blue2: #0db9d7;
+  --tn-blue5: #89ddff;
+  --tn-blue6: #b4f9f8;
+  --tn-blue7: #394b70;
+  --tn-magenta: #bb9af7;
+  --tn-magenta2: #ff007c;
+  --tn-purple: #9d7cd8;
+  --tn-orange: #ff9e64;
+  --tn-yellow: #e0af68;
+  --tn-green: #9ece6a;
+  --tn-green1: #73daca;
+  --tn-green2: #41a6b5;
+  --tn-teal: #1abc9c;
+  --tn-red: #f7768e;
+  --tn-red1: #db4b4b;
+}
+
+/* Dark scheme - Tokyo Night */
+[data-md-color-scheme="tokyo-night"] {
+  --md-default-bg-color: var(--tn-bg);
+  --md-default-fg-color: var(--tn-fg);
+  --md-default-fg-color--light: var(--tn-fg-dark);
+  --md-default-fg-color--lighter: var(--tn-dark5);
+  --md-default-fg-color--lightest: var(--tn-comment);
+  
+  /* Primary color */
+  --md-primary-fg-color: var(--tn-blue);
+  --md-primary-fg-color--light: var(--tn-cyan);
+  --md-primary-fg-color--dark: var(--tn-blue0);
+  --md-primary-bg-color: var(--tn-bg-dark);
+  --md-primary-bg-color--light: var(--tn-bg-highlight);
+  
+  /* Accent color */
+  --md-accent-fg-color: var(--tn-magenta);
+  --md-accent-fg-color--transparent: rgba(187, 154, 247, 0.1);
+  --md-accent-bg-color: var(--tn-bg-highlight);
+  
+  /* Code */
+  --md-code-fg-color: var(--tn-fg);
+  --md-code-bg-color: var(--tn-bg-dark);
+  --md-code-hl-color: rgba(125, 207, 255, 0.15);
+  --md-code-hl-number-color: var(--tn-orange);
+  --md-code-hl-special-color: var(--tn-magenta);
+  --md-code-hl-function-color: var(--tn-blue);
+  --md-code-hl-constant-color: var(--tn-orange);
+  --md-code-hl-keyword-color: var(--tn-magenta);
+  --md-code-hl-string-color: var(--tn-green);
+  --md-code-hl-name-color: var(--tn-cyan);
+  --md-code-hl-operator-color: var(--tn-blue5);
+  --md-code-hl-punctuation-color: var(--tn-fg-dark);
+  --md-code-hl-comment-color: var(--tn-comment);
+  --md-code-hl-generic-color: var(--tn-magenta);
+  --md-code-hl-variable-color: var(--tn-fg);
+  
+  /* Typeset */
+  --md-typeset-color: var(--tn-fg);
+  --md-typeset-a-color: var(--tn-blue);
+  
+  /* Navigation */
+  --md-footer-bg-color: var(--tn-bg-dark);
+  --md-footer-bg-color--dark: var(--tn-bg-dark);
+  
+  /* Admonitions */
+  --md-admonition-fg-color: var(--tn-fg);
+  --md-admonition-bg-color: var(--tn-bg-highlight);
+  
+  /* Tables */
+  --md-typeset-table-color: rgba(122, 162, 247, 0.1);
+  
+  /* Search */
+  --md-search-result-icon-color: var(--tn-comment);
+  
+  /* Shadow */
+  --md-shadow-z1: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.3);
+  --md-shadow-z2: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
+  --md-shadow-z3: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.5);
+}
+
+/* Header styling */
+[data-md-color-scheme="tokyo-night"] .md-header {
+  background-color: var(--tn-bg-dark);
+  border-bottom: 1px solid var(--tn-bg-highlight);
+}
+
+/* Navigation tabs */
+[data-md-color-scheme="tokyo-night"] .md-tabs {
+  background-color: var(--tn-bg-dark);
+}
+
+/* Sidebar */
+[data-md-color-scheme="tokyo-night"] .md-sidebar {
+  background-color: var(--tn-bg);
+}
+
+[data-md-color-scheme="tokyo-night"] .md-nav__link--active {
+  color: var(--tn-magenta);
+}
+
+[data-md-color-scheme="tokyo-night"] .md-nav__link:hover {
+  color: var(--tn-cyan);
+}
+
+/* Code blocks */
+[data-md-color-scheme="tokyo-night"] .highlight code {
+  background-color: var(--tn-bg-dark);
+  border-radius: 0.3rem;
+}
+
+[data-md-color-scheme="tokyo-night"] .highlighttable {
+  background-color: var(--tn-bg-dark);
+}
+
+/* Inline code */
+[data-md-color-scheme="tokyo-night"] code {
+  background-color: var(--tn-bg-highlight);
+  color: var(--tn-cyan);
+  padding: 0.1em 0.3em;
+  border-radius: 0.2rem;
+}
+
+/* Tables */
+[data-md-color-scheme="tokyo-night"] .md-typeset table:not([class]) {
+  border: 1px solid var(--tn-bg-highlight);
+}
+
+[data-md-color-scheme="tokyo-night"] .md-typeset table:not([class]) th {
+  background-color: var(--tn-bg-highlight);
+  color: var(--tn-magenta);
+}
+
+[data-md-color-scheme="tokyo-night"] .md-typeset table:not([class]) tr:hover {
+  background-color: var(--tn-bg-highlight);
+}
+
+/* Admonitions - SOTN themed */
+[data-md-color-scheme="tokyo-night"] .admonition.note,
+[data-md-color-scheme="tokyo-night"] details.note {
+  border-color: var(--tn-blue);
+}
+
+[data-md-color-scheme="tokyo-night"] .admonition.tip,
+[data-md-color-scheme="tokyo-night"] details.tip {
+  border-color: var(--tn-green);
+}
+
+[data-md-color-scheme="tokyo-night"] .admonition.warning,
+[data-md-color-scheme="tokyo-night"] details.warning {
+  border-color: var(--tn-yellow);
+}
+
+[data-md-color-scheme="tokyo-night"] .admonition.danger,
+[data-md-color-scheme="tokyo-night"] details.danger {
+  border-color: var(--tn-red);
+}
+
+[data-md-color-scheme="tokyo-night"] .admonition.info,
+[data-md-color-scheme="tokyo-night"] details.info {
+  border-color: var(--tn-cyan);
+}
+
+/* Status badges */
+.status-stub { 
+  background-color: var(--tn-terminal-black); 
+  color: var(--tn-fg-dark);
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  font-size: 0.75em;
+}
+.status-basic { 
+  background-color: var(--tn-yellow); 
+  color: var(--tn-bg-dark);
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  font-size: 0.75em;
+}
+.status-partial { 
+  background-color: var(--tn-orange); 
+  color: var(--tn-bg-dark);
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  font-size: 0.75em;
+}
+.status-complete { 
+  background-color: var(--tn-green); 
+  color: var(--tn-bg-dark);
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  font-size: 0.75em;
+}
+.status-verified { 
+  background-color: var(--tn-magenta); 
+  color: var(--tn-bg-dark);
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  font-size: 0.75em;
+}
+
+/* Scrollbar */
+[data-md-color-scheme="tokyo-night"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-md-color-scheme="tokyo-night"] ::-webkit-scrollbar-track {
+  background: var(--tn-bg-dark);
+}
+
+[data-md-color-scheme="tokyo-night"] ::-webkit-scrollbar-thumb {
+  background: var(--tn-terminal-black);
+  border-radius: 4px;
+}
+
+[data-md-color-scheme="tokyo-night"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--tn-comment);
+}
