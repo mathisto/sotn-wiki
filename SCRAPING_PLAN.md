@@ -183,12 +183,60 @@ def scrape_page(url, output_path):
 
 ## Status Tracking
 
-- [ ] Phase 1: GitHub Wiki (0/24 complete)
-- [ ] Phase 2: sotn.fun Wiki (0/22 complete)
+- [x] Phase 1: GitHub Wiki (23/23 complete) - 2026-01-03
+- [x] Phase 2: sotn.fun Wiki (21/21 complete) - 2026-01-03
 - [ ] Phase 3a: Fandom Characters (0/~20 complete)
 - [ ] Phase 3b: Fandom Locations (0/34 complete)
 - [ ] Phase 3c: Fandom Enemies (0/~100 complete)
 - [ ] Phase 3d: Fandom Items (0/~200 complete)
 
+### Phase 2 Completed Pages
+| File | Source Page | Status |
+|------|-------------|--------|
+| game/characters/alucard.md | Alucard | ✓ |
+| game/characters/alucard-blindfolded.md | Alucard_Blindfolded | ✓ |
+| game/characters/richter.md | Richter | ✓ |
+| game/mechanics/game-versions.md | Game_Versions | ✓ |
+| game/mechanics/damage-output.md | Damage-output | ✓ |
+| game/mechanics/rng.md | RNG | ✓ |
+| game/mechanics/entity-identification.md | Entity_Identification | ✓ |
+| game/mechanics/overlay.md | Overlay | ✓ |
+| game/mechanics/room-ids.md | Room_IDs | ✓ |
+| game/mechanics/tpage-layout.md | TPAGE_layout | ✓ |
+| game/mechanics/familiars.md | Familiar | ✓ |
+| game/locations/stages.md | Stage | ✓ |
+| game/mechanics/sound-effects.md | Sound_Effects | ✓ |
+| game/mechanics/jewel-sword.md | Jewel_Sword | ✓ |
+| game/mechanics/glitches.md | Glitches | ✓ |
+| game/mechanics/gameshark.md | GameShark | ✓ |
+| game/mechanics/ports-psp.md | Ports/PSP | ✓ |
+| game/mechanics/ports-xbox360.md | Ports/Xbox_360 | ✓ |
+| speedrunning/overview.md | Speedrunning | ✓ |
+| speedrunning/techniques.md | Techniques | ✓ |
+| speedrunning/death-skip.md | Death_Skip | ✓ |
+
+### Phase 1 Completed Pages
+| File | Source Page | Status |
+|------|-------------|--------|
+| decomp/build.md | Build | ✓ |
+| decomp/decompilation.md | Decompilation | ✓ |
+| decomp/psp-decompilation.md | Decompilation (PSP edition) | ✓ |
+| decomp/saturn-decompilation.md | Saturn decompilation | ✓ |
+| decomp/hd-version-matching.md | HD Version Matching | ✓ |
+| decomp/multiplatform-architecture.md | Multiplatform Architectural Considerations | ✓ |
+| decomp/internals.md | Internals | ✓ |
+| decomp/psp-overlay.md | PSP overlay header raw notes | ✓ |
+| decomp/jump-tables.md | Decompiling functions with jump tables | ✓ |
+| decomp/deduplication.md | Deduplication | ✓ |
+| decomp/asset-tool.md | Asset Tool | ✓ |
+| decomp/debug-module.md | Debug Module | ✓ |
+| decomp/psyq-reimplementations.md | Psy-Q Reimplementations comparision | ✓ |
+| decomp/register-mismatch-tricks.md | Register Mismatch Decompilation Tricks | ✓ |
+| decomp/game-versions.md | Game versions | ✓ |
+| decomp/sound-effects.md | Sound Effects Documentation | ✓ |
+| decomp/stage-graphics.md | Stage graphics | ✓ |
+| decomp/pr-guidelines.md | Pull Request Guidelines | ✓ |
+| decomp/faq.md | Hey can you do X FAQ | ✓ |
+
 ---
-Last Updated: 2026-01-03
+Last Updated: 2026-01-04

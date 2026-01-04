@@ -1,0 +1,2386 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The definitive Symphony of the Night knowledge base - bridging game lore with decompiled source code">
+      
+      
+      
+        <link rel="canonical" href="https://sotn.xee.dev/wiki/decomp/internals/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Internals - SOTN Decomp Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/tokyo-night.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#internals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SOTN Decomp Wiki" class="md-header__button md-logo" aria-label="SOTN Decomp Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 13h2v2h2v-2h2v2h2v-2h2v2h2v-5l3-3V1h2l4 2-4 2v2l3 3v12H11v-3a2 2 0 0 0-2-2 2 2 0 0 0-2 2v3H2zm16-3c-.55 0-1 .54-1 1.2V13h2v-1.8c0-.66-.45-1.2-1-1.2"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SOTN Decomp Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Internals
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Xeeynamo/sotn-decomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Xeeynamo/sotn-decomp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../PROGRESS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Progress
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../stages/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Stages
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../enemies/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Enemies
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bosses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Bosses
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../items/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Items
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../characters/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Characters
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../mechanics/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mechanics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../speedrunning/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Speedrunning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Decompilation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tags.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SOTN Decomp Wiki" class="md-nav__button md-logo" aria-label="SOTN Decomp Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 13h2v2h2v-2h2v2h2v-2h2v2h2v-5l3-3V1h2l4 2-4 2v2l3 3v12H11v-3a2 2 0 0 0-2-2 2 2 0 0 0-2 2v3H2zm16-3c-.55 0-1 .54-1 1.2V13h2v-1.8c0-.66-.45-1.2-1-1.2"/></svg>
+
+    </a>
+    SOTN Decomp Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Xeeynamo/sotn-decomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Xeeynamo/sotn-decomp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../stages/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stages
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normal Castle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Normal Castle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stages/normal/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    None
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reverse Castle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reverse Castle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stages/reverse/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    None
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../enemies/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enemies
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enemies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bosses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bosses
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bosses
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../items/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Items
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Items
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/weapons/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Weapons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/armor/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Armor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/accessories/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/consumables/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/relics/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../characters/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Characters
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Characters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mechanics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mechanics/familiars/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Familiars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../speedrunning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Speedrunning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Speedrunning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decompilation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decompilation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-overlay-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The overlay system
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The overlay system">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#memory-mapping-alucard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memory mapping (Alucard)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-mapping-richter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memory mapping (Richter)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mainexe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        main.exe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#game-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Game engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#game-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Game API
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File handling
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lba-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LBA system
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#psy-q-open" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PSY-Q open
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulator
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#graphics-rendering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graphics rendering
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Graphics rendering">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primitive-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Primitive list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drawing-scene" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Drawing scene
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprite-banks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sprite banks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VRAM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beta-content" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beta content
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#st0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ST0
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MAD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-factory-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The factory system
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The factory system">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factory-blueprints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factory Blueprints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#child-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Child entities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="internals">Internals<a class="headerlink" href="#internals" title="Permanent link">&para;</a></h1>
+<h2 id="the-overlay-system">The overlay system<a class="headerlink" href="#the-overlay-system" title="Permanent link">&para;</a></h2>
+<p>The game is divided into separate modules called overlays. Overlays (<code>OVL</code> in short) are chunk of compiled code that are loaded into a specific address based on different situations in the game. This allows to fit more content in the game.</p>
+<h3 id="memory-mapping-alucard">Memory mapping (Alucard)<a class="headerlink" href="#memory-mapping-alucard" title="Permanent link">&para;</a></h3>
+<p>Address</p>
+<p>End addr.</p>
+<p>File name</p>
+<p>Description</p>
+<p><code>80010000</code></p>
+<p><code>8009FFFF</code></p>
+<p><code>main.exe</code></p>
+<p>Hardware API, bootloader, shared memory</p>
+<p><code>800A0000</code></p>
+<p><code>8013BFFF</code></p>
+<p><code>DRA.BIN</code></p>
+<p><a href="#game-engine">Game engine</a></p>
+<p><code>8013C000</code></p>
+<p><code>8016FFFF</code></p>
+<p><code>BIN/ARC_F.BIN</code></p>
+<p>Alucard spritesheet</p>
+<p><code>80170000</code></p>
+<p><code>80179FFF</code></p>
+<p><code>SERVANT/TT_*.BIN</code></p>
+<p>Familiar program</p>
+<p><code>8017A000</code></p>
+<p><code>8017CFFF</code></p>
+<p><code>BIN/WEAPON0.BIN</code></p>
+<p>Right-hand equip program</p>
+<p><code>8017D000</code></p>
+<p><code>8017FFFF</code></p>
+<p><code>BIN/WEAPON1.BIN</code></p>
+<p>Left-hand equip program</p>
+<p><code>80180000</code></p>
+<p><code>801DFFFF</code></p>
+<p><code>ST/*/*.BIN</code></p>
+<p><a href="#stages">Stages</a> program</p>
+<p><code>801E0000</code></p>
+<p><code>801E8000</code></p>
+<p><code>F_MAP.BIN</code></p>
+<p>Castle map graphics</p>
+<p><code>801F0000</code></p>
+<p><code>801F7800</code></p>
+<p>Heap</p>
+<p><code>801F????</code></p>
+<p><code>801FFFF0</code></p>
+<p>Stack</p>
+<p><code>80280000</code></p>
+<p><code>80??????</code></p>
+<p>Used to load debug assets</p>
+<h3 id="memory-mapping-richter">Memory mapping (Richter)<a class="headerlink" href="#memory-mapping-richter" title="Permanent link">&para;</a></h3>
+<p>Address</p>
+<p>End addr.</p>
+<p>File name</p>
+<p>Description</p>
+<p><code>80010000</code></p>
+<p><code>8009FFFF</code></p>
+<p><code>main.exe</code></p>
+<p>Hardware API, bootloader, shared memory</p>
+<p><code>800A0000</code></p>
+<p><code>8013BFFF</code></p>
+<p><code>DRA.BIN</code></p>
+<p><a href="#game-engine">Game engine</a></p>
+<p><code>8013C000</code></p>
+<p><code>8017FFFF</code></p>
+<p><code>BIN/RIC.BIN</code></p>
+<p>Richter program</p>
+<p><code>80180000</code></p>
+<p><code>801DFFFF</code></p>
+<p><code>ST/*/*.BIN</code></p>
+<p><a href="#stages">Stages</a> program</p>
+<p><code>801E0000</code></p>
+<p><code>801E8000</code></p>
+<p><code>F_MAP.BIN</code></p>
+<p>Castle map graphics</p>
+<p><code>801F0000</code></p>
+<p><code>801F7800</code></p>
+<p>Heap</p>
+<p><code>801F????</code></p>
+<p><code>801FFFF0</code></p>
+<p>Stack</p>
+<h3 id="mainexe">main.exe<a class="headerlink" href="#mainexe" title="Permanent link">&para;</a></h3>
+<p>Loaded by the PlayStation 1 BIOS. On the game disk the name is <code>SLUS_000.67</code> and it is described by the boot configuration file <code>SYSTEM.CNF</code>. In the absence of a configuration file, this executable can be named as <code>PSX.EXE</code>. The name <code>main.exe</code> is after its counterpart found in the PSP version.</p>
+<p>It contains all the hardware API (eg. gamepad, CD, memory card, GPU renderer) of the PlayStation 1 console from the PSY-Q SDK. It does not contain any game logic. The entry point <code>main</code> is just responsible to load <code>DRA.BIN</code> and <code>F_MAP.BIN</code> from the disk and execute the entry point of DRA.BIN immediately.</p>
+<p>This executable is also responsible of statically allocate a shared portion of memory that all the overlays can access to. One typical example is the <a href="#game-api"><code>GameApi</code></a> structure. Overlays never communicate between one another with the exception of this portion of memory.</p>
+<h3 id="game-engine">Game engine<a class="headerlink" href="#game-engine" title="Permanent link">&para;</a></h3>
+<p>Named as <code>DRA.BIN</code>. It contains all the business logic such as the game loop, the <a href="#game-api">game API</a>, logic to draw maps, load stages, render the graphics, handles the menu, defines monsters, equipment and much more. There is a state-machine that decides what the game engine is supposed to do (eg. load a new stage, spawn Alucard entity and move him across the stage, pause the game into the menu, play FMV). It is the most critical file of the game.</p>
+<h3 id="stages">Stages<a class="headerlink" href="#stages" title="Permanent link">&para;</a></h3>
+<p>Contains all the unique logic to handle map specific events, cut-scenes, enemy AI, collisions and more. It also contains the rooms and entities layout. Each overlay can be considered as its own mini-game. The title screen <code>SEL.BIN</code> is an example of how a stage overlay can act very differently. It exposes a small portion of endpoints into the <a href="#game-api">game API</a> including the room location list or the sprite definitions.</p>
+<p>The following is a list of the many stage overlays found in the binary of the game:</p>
+<p>ID</p>
+<p>PSX</p>
+<p>PSP</p>
+<p>Description</p>
+<p>00</p>
+<p>NO0</p>
+<p>STP00</p>
+<p>Marble Gallery</p>
+<p>01</p>
+<p>NO1</p>
+<p>STP01</p>
+<p>Outer Wall</p>
+<p>02</p>
+<p>LIB</p>
+<p>STP02</p>
+<p>Long Library</p>
+<p>03</p>
+<p>CAT</p>
+<p>STP03</p>
+<p>Catacombs</p>
+<p>04</p>
+<p>NO2</p>
+<p>STP04</p>
+<p>Olrox's Quarters</p>
+<p>05</p>
+<p>CHI</p>
+<p>STP05</p>
+<p>Abandoned Mine</p>
+<p>06</p>
+<p>DAI</p>
+<p>STP06</p>
+<p>Royal Chapel</p>
+<p>07</p>
+<p>NP3</p>
+<p>STP07</p>
+<p>Castle Entrance</p>
+<p>08</p>
+<p>CEN</p>
+<p>STP08</p>
+<p>Castle Center</p>
+<p>09</p>
+<p>NO4</p>
+<p>STP09</p>
+<p>Underground Caverns</p>
+<p>0A</p>
+<p>ARE</p>
+<p>STP10</p>
+<p>Colosseum</p>
+<p>0B</p>
+<p>TOP</p>
+<p>STP11</p>
+<p>Castle Keep (Hallway Entrance)</p>
+<p>0C</p>
+<p>NZ0</p>
+<p>STP12</p>
+<p>Alchemy Laboratory</p>
+<p>0D</p>
+<p>NZ1</p>
+<p>STP13</p>
+<p>Clock Tower</p>
+<p>0E</p>
+<p>WRP</p>
+<p>STP14</p>
+<p>Warp Room</p>
+<p>0F</p>
+<p>NO1</p>
+<p>STP15</p>
+<p>10</p>
+<p>NO0</p>
+<p>STP16</p>
+<p>11</p>
+<p>NO1</p>
+<p>STP17</p>
+<p>12</p>
+<p>DRE</p>
+<p>STP18</p>
+<p>Nightmare</p>
+<p>13</p>
+<p>NZ0</p>
+<p>STP19</p>
+<p>14</p>
+<p>NZ1</p>
+<p>STP20</p>
+<p>15</p>
+<p>LIB</p>
+<p>STP21</p>
+<p>16</p>
+<p>BO7</p>
+<p>STP22</p>
+<p>Cerberos (Boss)</p>
+<p>17</p>
+<p>MAR</p>
+<p>STP23</p>
+<p>Maria cutscene (clock room)</p>
+<p>18</p>
+<p>BO6</p>
+<p>STP24</p>
+<p>Richter (Boss)</p>
+<p>19</p>
+<p>BO5</p>
+<p>STP25</p>
+<p>Hippogryph (Boss)</p>
+<p>1A</p>
+<p>BO4</p>
+<p>STP26</p>
+<p>Doppleganger10 (Boss)</p>
+<p>1B</p>
+<p>BO3</p>
+<p>STP27</p>
+<p>Scylla (Boss)</p>
+<p>1C</p>
+<p>BO2</p>
+<p>STP28</p>
+<p>Minotaurus / Werewolf (Boss)</p>
+<p>1D</p>
+<p>BO1</p>
+<p>STP29</p>
+<p>Granfaloon (Boss)</p>
+<p>1E</p>
+<p>BO0</p>
+<p>STP30</p>
+<p>Olrox (Boss)</p>
+<p>1F</p>
+<p>ST0</p>
+<p>STP31</p>
+<p>Final Stage: Bloodlines</p>
+<p>20</p>
+<p>RNO0</p>
+<p>STP32</p>
+<p>Black Marble Gallery</p>
+<p>21</p>
+<p>RNO1</p>
+<p>STP33</p>
+<p>Reverse Outer Wall</p>
+<p>22</p>
+<p>RLIB</p>
+<p>STP34</p>
+<p>Forbidden Library</p>
+<p>23</p>
+<p>RCAT</p>
+<p>STP35</p>
+<p>Floating Catacombs</p>
+<p>24</p>
+<p>RNO2</p>
+<p>STP36</p>
+<p>Death Wing's Lair</p>
+<p>25</p>
+<p>RCHI</p>
+<p>STP37</p>
+<p>Cave (Reverse Abandoned Mine)</p>
+<p>26</p>
+<p>RDAI</p>
+<p>STP38</p>
+<p>Anti-Chapel</p>
+<p>27</p>
+<p>RNO3</p>
+<p>STP39</p>
+<p>Reverse Castle Entrance</p>
+<p>28</p>
+<p>RCEN</p>
+<p>STP40</p>
+<p>Reverse Castle Center (Shaft Boss Fight)</p>
+<p>29</p>
+<p>RNO4</p>
+<p>STP41</p>
+<p>Reverse Caverns</p>
+<p>2A</p>
+<p>RARE</p>
+<p>STP42</p>
+<p>Reverse Colosseum</p>
+<p>2B</p>
+<p>RTOP</p>
+<p>STP43</p>
+<p>Reverse Castle Keep (Hallway Entrance)</p>
+<p>2C</p>
+<p>RNZ0</p>
+<p>STP44</p>
+<p>Necromancy Laboratory</p>
+<p>2D</p>
+<p>RNZ1</p>
+<p>STP45</p>
+<p>Reverse Clock Tower</p>
+<p>2E</p>
+<p>RWRP</p>
+<p>STP46</p>
+<p>Reverse Warp Room</p>
+<p>2F</p>
+<p>NO1</p>
+<p>STP47</p>
+<p>30</p>
+<p>NO1</p>
+<p>STP48</p>
+<p>31</p>
+<p>NO1</p>
+<p>STP49</p>
+<p>32</p>
+<p>NO1</p>
+<p>STP50</p>
+<p>33</p>
+<p>NO1</p>
+<p>STP51</p>
+<p>34</p>
+<p>NO1</p>
+<p>STP52</p>
+<p>35</p>
+<p>RNZ1</p>
+<p>STP53</p>
+<p>36</p>
+<p>RBO8</p>
+<p>STP54</p>
+<p>Galamoth (Boss)</p>
+<p>37</p>
+<p>RBO7</p>
+<p>STP55</p>
+<p>Akmodan II (Boss)</p>
+<p>38</p>
+<p>RBO6</p>
+<p>STP56</p>
+<p>Dracula (Boss)</p>
+<p>39</p>
+<p>RBO5</p>
+<p>STP57</p>
+<p>Doppleganger40 (Boss)</p>
+<p>3A</p>
+<p>RBO4</p>
+<p>STP58</p>
+<p>The Creature (Boss)</p>
+<p>3B</p>
+<p>RBO3</p>
+<p>STP59</p>
+<p>Medusa (Boss)</p>
+<p>3C</p>
+<p>RBO2</p>
+<p>STP60</p>
+<p>Death (Boss)</p>
+<p>3D</p>
+<p>RBO1</p>
+<p>STP61</p>
+<p>Beezelbub (Boss)</p>
+<p>3E</p>
+<p>RBO0</p>
+<p>STP62</p>
+<p>Fake Trevor / Fake Grant / Fake Sypha (Boss)</p>
+<p>3F</p>
+<p>NO1</p>
+<p>STP63</p>
+<p>40</p>
+<p>MAD</p>
+<p>STP64</p>
+<p>Debug Room</p>
+<p>41</p>
+<p>NO3</p>
+<p>STP65</p>
+<p>Castle Entrance (Intro / Death Cutscene)</p>
+<p>42</p>
+<p>DAI</p>
+<p>STP66</p>
+<p>43</p>
+<p>LIB</p>
+<p>STP67</p>
+<p>44</p>
+<p>NO1</p>
+<p>STP68</p>
+<p>45</p>
+<p>SEL</p>
+<p>STP69</p>
+<p>Title Screen / Main Menu</p>
+<p>46</p>
+<p>TE1</p>
+<p>STP70</p>
+<p>Test Room 1</p>
+<p>47</p>
+<p>TE2</p>
+<p>STP71</p>
+<p>Test Room 2</p>
+<p>48</p>
+<p>TE3</p>
+<p>STP72</p>
+<p>Test Room 3</p>
+<p>49</p>
+<p>TE4</p>
+<p>STP73</p>
+<p>Test Room 4</p>
+<p>4A</p>
+<p>TE5</p>
+<p>STP74</p>
+<p>Test Room 5</p>
+<p>4B</p>
+<p>TOP</p>
+<p>STP75</p>
+<p>4C</p>
+<p>TE2</p>
+<p>STP76</p>
+<p>4D</p>
+<p>TE2</p>
+<p>STP77</p>
+<p>4E</p>
+<p>TE2</p>
+<p>STP78</p>
+<p>4F</p>
+<p>TE2</p>
+<p>STP79</p>
+<p>Please note, at the time of writing, not all stage overlays are extracted and available for decompilation. This was a deliberate decision made in an effort to keep the scope of the project manageable during the beginning phase. As the project progresses, more overlays will likely be extracted and made available for decompilation.</p>
+<h2 id="game-api">Game API<a class="headerlink" href="#game-api" title="Permanent link">&para;</a></h2>
+<p>Exposes endpoints from different overlays in a shared memory area, so they can communicate each other indirectly.</p>
+<h2 id="file-handling">File handling<a class="headerlink" href="#file-handling" title="Permanent link">&para;</a></h2>
+<p>The game has three ways to load the game files.</p>
+<h3 id="lba-system">LBA system<a class="headerlink" href="#lba-system" title="Permanent link">&para;</a></h3>
+<p>This is the main way the game loads files. To greatly improve loading times, files are accessed by directly specifying to the CD-ROM system the absolute position of the file to load in the disk. This saves time as the disk head would not need to fetch the file location and size from the main table searching by the name. The location is a 32-bit integer that represents the sector index of where the file is physically located on the disk. The size of a sector is physically 2352 bytes long, but only 2048 of them are used to store the actual game data (aside from the XA tracks and the STR videos).</p>
+<p>There are mainly two tables in <code>DRA.BIN</code> that stores all the game data. One is at <code>800A3C40</code> which stores every <a href="#stages">stage</a> offsets and size. The other table is at <a href="https://docs.google.com/spreadsheets/d/1_8JTISfGOXx7UbrdKXnSUYaHAxbLdejoOVJ4svcEU4I/edit?usp=sharing"><code>800ACC74</code></a> and it is used to load specific files in different part of the memory based on their type. The stage <code>ST/SEL/SEL.BIN</code> contains a duplicate table of <code>800A3C40</code>, probably to have some kind of stage select built in.</p>
+<p>As the location of the files is hard-coded, their position has to be known before building the actual game. It is believed the PSY-Q SDK has tools to offer this specific functionality. In alternative the tool <a href="https://github.com/Xeeynamo/sotn-decomp/tree/master/tools/sotn-disk">sotn-disk</a> can be used to patch those binaries after the image is being built.</p>
+<h3 id="psy-q-open">PSY-Q open<a class="headerlink" href="#psy-q-open" title="Permanent link">&para;</a></h3>
+<p>The classic way of opening files with the UNIX function <code>open</code>. This is only used by <code>main.exe</code> to bootstrap DRA.BIN and F_MAP.BIN. It is known to be slower than using an LBA table as it has to move the head at the beginning of the disk, look for the Primary Volume Descriptor offset and walk through the directories to resolve the chosen sector offset and file length.</p>
+<h3 id="simulator">Simulator<a class="headerlink" href="#simulator" title="Permanent link">&para;</a></h3>
+<p>Used during the development. The file path prefix is <code>sim:</code> (eg. <code>sim:c:\bin\f_title1.bin</code>). The PlayStation 1 offers drivers for the file I/O. Most likely the developers registered the driver <code>sim</code> to allow the PlayStation to load overlays on the fly from a physical hard drive to quickly iterate between new builds. The <code>main.exe</code> initially attempts to load <code>DRA.BIN</code> and <code>DRA.BIO</code> (formal name of F_MAP.BIN) from the simulator. If it succeeded it sets the flag at <code>800978AC</code> to a value different than <code>0</code>, effectively indicating the game needs to use the simulator instead of the LBA for all the following files.</p>
+<h2 id="graphics-rendering">Graphics rendering<a class="headerlink" href="#graphics-rendering" title="Permanent link">&para;</a></h2>
+<p>This is a write-up to break down how the game renders graphics on screen. In short the game has a <a href="#primitive-list">primitive list</a> that gets consolidated into a <a href="#drawing-scene">drawing scene</a> every frame. When graphics contains <a href="#sprites">sprites</a> or textures the resources are loaded from the <a href="#vram">VRAM</a>.</p>
+<h3 id="primitive-list">Primitive list<a class="headerlink" href="#primitive-list" title="Permanent link">&para;</a></h3>
+<p>TODO</p>
+<h3 id="drawing-scene">Drawing scene<a class="headerlink" href="#drawing-scene" title="Permanent link">&para;</a></h3>
+<p>TODO</p>
+<h3 id="sprite-banks">Sprite banks<a class="headerlink" href="#sprite-banks" title="Permanent link">&para;</a></h3>
+<p>TODO: anim set, anim frame, clut index, tpage.</p>
+<h3 id="vram">VRAM<a class="headerlink" href="#vram" title="Permanent link">&para;</a></h3>
+<p><img alt="image" src="https://private-user-images.githubusercontent.com/6128729/242634327-bde88973-86d7-4590-9952-08d092b561ce.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc0OTUzNjgsIm5iZiI6MTc2NzQ5NTA2OCwicGF0aCI6Ii82MTI4NzI5LzI0MjYzNDMyNy1iZGU4ODk3My04NmQ3LTQ1OTAtOTk1Mi0wOGQwOTJiNTYxY2UucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjAxMDRUMDI1MTA4WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YTYzNWM1YTYxZWE1MjI3ZGM2NjBkOWU4YTY1OWQ2ZjhmZTI5MDNjZWFlYWQ4NWMwZWNiYTcxNGIwNmE1OWZlZCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.vWLY6SpEcKUW4zJOl43VtkwYaSww-bI6XARNoAla18g" /></p>
+<p>This write-up focuses on how the Video RAM (VRAM) is managed by a stage. The VRAM can be divided into four quadrants, each measuring 512x256 pixels.</p>
+<p>When working with graphics that have a 4 bits per pixel (4bpp) format, a Color Look-Up Table (CLUT) is utilized. In the following examples, a grey CLUT will be used as a reference.</p>
+<p>To transfer graphics from the main memory to the VRAM, a DMA operation is performed using the PSY-Q SDK function <code>LoadImage(RECT*, u_long*)</code>. The first parameter <code>RECT</code> specifies the location in the VRAM where the graphics will be placed. The second parameter <code>u_long*</code> is a pointer to the main memory location from which the graphics will be loaded. It is important to note that the coordinates and size mentioned in the <code>RECT</code> parameter are based on a 16-bit image. For example, to load a 256x256 4bpp texture, the <code>RECT</code> values will be set as <code>w=64</code> and <code>h=256</code>.</p>
+<h4 id="rendering-targets">Rendering targets<a class="headerlink" href="#rendering-targets" title="Permanent link">&para;</a></h4>
+<p>The upper-left quadrant of the VRAM serves as a double buffer and acts as the render target for creating the final picture. Utilizing a double buffer is crucial to prevent tearing artifacts in the displayed image. While one buffer is used to transfer its content to the video output, the other buffer can be populated to prepare for the next frame. The game employs two buffer descriptors, namely <code>GpuBuffer g_GpuBuffers[2]</code> and the variable <code>g_CurrentBuffer</code> to keep track of the currently active buffer for rendering the scene. When the frame is ready to be displayed on the screen, <code>g_CurrentBuffer = g_CurrentBuffer-&gt;next</code> is called to flip the buffers, ensuring that the rendering occurs on the appropriate buffer. During the rendering of stages, each buffer is represented as two 256x240 targets one next to the other. These buffers are stored in the RGBA5551 format, where each pixel is represented by a 16-bit value.</p>
+<p>To achieve effects like the photo burning at the end of the prologue, the game creates a duplicate copy of one of the buffers and uses it as a texture. This technique is commonly used in PlayStation 1 games and subsequent game platforms.</p>
+<h4 id="stage-graphics">Stage graphics<a class="headerlink" href="#stage-graphics" title="Permanent link">&para;</a></h4>
+<p><img alt="image" src="https://private-user-images.githubusercontent.com/6128729/242641291-2f57d40a-49fa-45e4-a78f-c1d7d0f0369e.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc0OTUzNjgsIm5iZiI6MTc2NzQ5NTA2OCwicGF0aCI6Ii82MTI4NzI5LzI0MjY0MTI5MS0yZjU3ZDQwYS00OWZhLTQ1ZTQtYTc4Zi1jMWQ3ZDBmMDM2OWUucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjAxMDRUMDI1MTA4WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YzBjNjVjMzc0ZjUzNDhiNzBlMzIxYThjOWM3YmYwZDgxZDllNjIyZjMzODBhYjc2NTAyNWI5ZjZmMjU3NzQ3NSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.3ZKTb0Fk9S4uHESc1fCL-q3EtsDVqqQ51IwElj3quYk" /></p>
+<p>The second quadrant in the upper-right corner of the VRAM is dedicated to storing stage graphics. It specifically contains everything related to a given stage, including the tileset and decorative entities (e.g. the moving trees in parallax outside the castle or the clock tower in the prologue). Stage graphics are loaded from <code>ST/{stage}/F_{stage}.BIN</code> which is always a 256KB file consisting of 32 images of 128x128 pixels and a 4bpp format. Typically the graphics at the far left is used for the tile map and the one at the far right is for the entities.</p>
+<p>The first few 256x256 tpages of the stage graphics are 256x240 of the actual tiles and the bottom 16x256 is utilised as a palette collection in the RGBA5551 format. All the stage graphics exclusively use the CLUT at that location to render the tile map. As a result the last row of the tileset is reserved for the palette, often resulting to either uncomprehensive graphics or left blank.</p>
+<p>The tiles within the tileset are referenced by an index, where each tile occupies a space of 16x16 pixels. Tile <code>0</code> is always empty and it is never rendered. Tile <code>1</code> is located at <code>(16, 0)</code> while the tile <code>15</code> is is at <code>(240, 0)</code>. Following this pattern, tile <code>16</code> can be located at <code>(0, 16)</code>. It is worth noting that tile maps are crafted in a way where tiles from 240 to 255 are never used, as they contain the CLUT for the stage. Typically, after tile 239, the next tile would be tile 256, positioned at (256, 0).</p>
+<h4 id="dra-entities">DRA entities<a class="headerlink" href="#dra-entities" title="Permanent link">&para;</a></h4>
+<p><img alt="image" src="https://private-user-images.githubusercontent.com/6128729/242643094-ac8429b4-70d9-4935-8c1e-1ba7c82c93b8.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc0OTUzNjgsIm5iZiI6MTc2NzQ5NTA2OCwicGF0aCI6Ii82MTI4NzI5LzI0MjY0MzA5NC1hYzg0MjliNC03MGQ5LTQ5MzUtOGMxZS0xYmE3YzgyYzkzYjgucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjAxMDRUMDI1MTA4WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YmZlMjlmNGNlNmU2MmMyYmMwYWY3MTY5ZmExMWUzNGJhNGEwMTExNDczMWNiMzNjZDJmYWZlZTY2MTM1YmFhZSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.BAZaOZZneBINinDyZQpjgTdu0lSXgax-6uVeujutoW4" /></p>
+<p>The fourth quadrant at the bottom-right is dedicated to the game engine <code>DRA.BIN</code>. It stores the graphics that are shared across stages and can be reused without the need to load them every time. This is true even if the shared entities code (e.g. the candle or the item prize) is store inside each stage overlay and not in DRA. For Alucard, these graphics are loaded from BIN/F_GAME.BIN, while for Richter, they are loaded from BIN/F_GAME2.BIN. This section of VRAM contains a series of 32 images, each with a size of 128x128 pixels and a 4bpp format.</p>
+<p>The file from which these graphics are loaded is 264KB in size. The last 8KB of the file is allocated for the CLUT, which is loaded at the very bottom of the first quadrant, just below the two <a href="#rendering-targets">rendering targets</a>.</p>
+<h4 id="dynamic-entities">Dynamic entities<a class="headerlink" href="#dynamic-entities" title="Permanent link">&para;</a></h4>
+<p><img alt="image" src="https://private-user-images.githubusercontent.com/6128729/242651575-09fecde4-2d33-4058-a8dc-388d7a16dafb.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Njc0OTUzNjgsIm5iZiI6MTc2NzQ5NTA2OCwicGF0aCI6Ii82MTI4NzI5LzI0MjY1MTU3NS0wOWZlY2RlNC0yZDMzLTQwNTgtYThkYy0zODhkN2ExNmRhZmIucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDEwNCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjAxMDRUMDI1MTA4WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZjI0MTBjMmJlMmRjMWU5NTZlODdkYzBkZTM3ODc5M2M2YzIyNTMzNTdmOWU1MWY2NDlmNjM5MWZjZDI5OTA0MiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.c4o2M19DT357prQ5ZDarV3GjT8BUY2a6cZ0Hbb29N70" /></p>
+<p>This last section is still work-in-progress. It is currently unknown how the game dynamically loads this graphics and where it comes from. It seems to be dynamically loaded from memory based on the room where the player is into.</p>
+<h2 id="beta-content">Beta content<a class="headerlink" href="#beta-content" title="Permanent link">&para;</a></h2>
+<h2 id="st0">ST0<a class="headerlink" href="#st0" title="Permanent link">&para;</a></h2>
+<p>TODO</p>
+<h2 id="mad">MAD<a class="headerlink" href="#mad" title="Permanent link">&para;</a></h2>
+<p>The debug room overlay <code>ST/MAD.BIN</code> was compiled earlier than the first retail release of the game. All the offsets that refers to DRA.BIN points to invalid portions of data or to the wrong API calls, effectively breaking the majority of its original functionalities. That is why the debug room does not contain any object. By compiling the debug room with make mad_fix you can restore it by redirecting the old pointers to the retail version of the game.</p>
+<h2 id="the-factory-system">The factory system<a class="headerlink" href="#the-factory-system" title="Permanent link">&para;</a></h2>
+<p>Many entities in the game spawn other entities in a roundabout, indirect manner. For example, let's consider the function DoGravityJump, which is used when the player activates their gravity boots. It accelerates the player rapidly into the air, but it also creates a factory, using this syntax:</p>
+<p><code>CreateEntFactoryFromEntity(g_CurrentEntity, FACTORY(0, 2), 0);</code></p>
+<p>This will create a factory. The factory is a short-lived entity which exists solely for the purpose of spawning another entity. We pass it a basis entity (in this case g_CurrentEntity) which will act as the parent of our new entity. By default, our new entity gets spawned into the same location as the parent.</p>
+<p>The FACTORY() macro is important. It controls the behavior of the factory to determine what child is made, and any parameters related to that.</p>
+<h3 id="factory-blueprints">Factory Blueprints<a class="headerlink" href="#factory-blueprints" title="Permanent link">&para;</a></h3>
+<p>When a factory is created, it has the purpose of spawning a child. It builds that child (hence being called a factory), and does so based on a set of parameters. We call these parameters the "blueprint", the design for building the child. In this case, the gravity jump is creating a factory to use blueprint 2.</p>
+<p>To see what blueprints are doing, we can look to <code>assets/dra/factory_blueprint.json</code> (note: Richter has his own set of blueprints, so any functions in RIC should look to <code>assets/ric</code> for those blueprints). We can then look at blueprint 2, as the blueprint with ID of 2. That is:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>{
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>            &quot;id&quot;: 2,
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>            &quot;id_hex&quot;: &quot;2&quot;,
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>            &quot;ram_addr&quot;: &quot;800AD1E0&quot;,
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            &quot;childId&quot;: 3,
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            &quot;unk1&quot;: 1,
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            &quot;unk2&quot;: {
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                &quot;bit7&quot;: true,
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                &quot;bit6&quot;: true,
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                &quot;bottom6&quot;: 1
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            },
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            &quot;unk3&quot;: 0,
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>            &quot;unk4&quot;: {
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                &quot;topHalf&quot;: 2,
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                &quot;bottomHalf&quot;: 0
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            },
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            &quot;unk5&quot;: 0
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        },
+</span></code></pre></div>
+<p>Everything from <code>childId</code> down is controlling how the factory behaves. Some factories will spawn multiple child entities, for example. A lot of these fields are not understood, and should be researched. Look to EntityEntFactory's first block of lines to see how the data is loaded into the fields of the factory.</p>
+<p>The most important element of the blueprint is the <code>childId</code>, which tells us what child is made. In this case, the child is entity #3.</p>
+<h3 id="child-entities">Child entities<a class="headerlink" href="#child-entities" title="Permanent link">&para;</a></h3>
+<p>When looking at these child entities, they are numbered and are pulled from a few different tables. Factories in the main game and overlays will pull from <code>g_DraEntityTbl</code> (and in Richter's code, <code>g_RicEntityTbl</code>). In this case, we will look at the #3 entity (counting from 0 of course) in the DRA entity table, and we find <code>EntityGravityBootBeam</code>. Lines right up! This factory will create the blue and white beam from Alucard's feet when gravity jumping.</p>
+<p>Weapons are different. You will usually see weapon calls like</p>
+<p><code>g_api.CreateEntFactoryFromEntity(self, ((g_HandId + 1) &lt;&lt; 0xE) + FACTORY(0x100, 88), 0);</code></p>
+<p>The use of <code>g_HandId</code> is crucial for knowing this is a weapon call. You can look to <code>func_8011A4D0</code> to understand how entity update functions are assigned to new entities. Once we identify this as a weapon call, we can look to the blueprints. We have blueprint 88, which says it has child 9 (again, in <code>assets/dra/factory_blueprint.json</code>). But this is not the 9<sup>th</sup> entity in <code>g_DraEntityTbl</code>! This is the 9<sup>th</sup> element in the Weapon struct in <code>include/weapon.h</code>. We can count these down and see <code>func_ptr_80170024</code>. This factory call will create an entity whose update function is <code>func_ptr_80170024</code>.</p>
+<p>This process of identifying what a factory does can be a little confusing. Anywhere in the code which uses a <code>CreateEntFactoryFromEntity</code> call should ideally have a comment saying what entity is being made from the chosen blueprint.</p>
+<p>It would also be nice if we had a macro for something like <code>WPN_FACTORY()</code> which would bake in the <code>g_HandId</code> logic, which is somewhat bulky.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Xeeynamo/sotn-decomp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://sotn-discord.xee.dev/" target="_blank" rel="noopener" title="sotn-discord.xee.dev" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

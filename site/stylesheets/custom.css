@@ -1,0 +1,196 @@
+/* SOTN Decomp Wiki Custom Styles */
+
+/* Page maturity indicators */
+.page-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--md-code-bg-color);
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.page-meta .meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.page-meta .meta-label {
+  color: var(--md-default-fg-color--lighter);
+}
+
+/* Code reference tables */
+.code-ref-table {
+  font-size: 0.9rem;
+}
+
+.code-ref-table code {
+  font-size: 0.85em;
+}
+
+.code-ref-table a {
+  text-decoration: none;
+}
+
+.code-ref-table a:hover {
+  text-decoration: underline;
+}
+
+/* Stats grid for items/enemies */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.stat-card {
+  background-color: var(--md-code-bg-color);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 3px solid var(--md-accent-fg-color);
+}
+
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  color: var(--md-default-fg-color--lighter);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-card .stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--md-accent-fg-color);
+}
+
+/* Location cards for stages */
+.location-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.location-icon {
+  font-size: 3rem;
+}
+
+.location-info h1 {
+  margin: 0;
+}
+
+.location-info .stage-code {
+  font-family: var(--md-code-font-family);
+  color: var(--md-default-fg-color--lighter);
+}
+
+/* Enemy/boss portraits placeholder */
+.entity-portrait {
+  width: 128px;
+  height: 128px;
+  background-color: var(--md-code-bg-color);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--md-default-fg-color--lighter);
+  float: right;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Item icon placeholder */
+.item-icon {
+  width: 64px;
+  height: 64px;
+  background-color: var(--md-code-bg-color);
+  border-radius: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--md-default-fg-color--lighter);
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+
+/* Progress table styling */
+.progress-table {
+  width: 100%;
+}
+
+.progress-table th {
+  text-align: left;
+}
+
+.progress-table .progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--md-code-bg-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-table .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--tn-green), var(--tn-cyan));
+  transition: width 0.3s ease;
+}
+
+/* Tag styling for versions */
+.version-tag {
+  display: inline-block;
+  padding: 0.15em 0.4em;
+  font-size: 0.75em;
+  border-radius: 0.25em;
+  font-weight: 500;
+}
+
+.version-tag.psx { background-color: #003087; color: white; }
+.version-tag.saturn { background-color: #0d47a1; color: white; }
+.version-tag.psp { background-color: #00695c; color: white; }
+.version-tag.hd { background-color: #7b1fa2; color: white; }
+
+/* Decomp status indicators */
+.decomp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.decomp-status::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.decomp-status.matched::before { background-color: var(--tn-green); }
+.decomp-status.equivalent::before { background-color: var(--tn-cyan); }
+.decomp-status.wip::before { background-color: var(--tn-yellow); }
+.decomp-status.todo::before { background-color: var(--tn-red); }
+
+/* Responsive adjustments */
+@media screen and (max-width: 76.1875em) {
+  .entity-portrait {
+    float: none;
+    margin: 0 auto 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Print styles */
+@media print {
+  .page-meta,
+  .entity-portrait {
+    display: none;
+  }
+}

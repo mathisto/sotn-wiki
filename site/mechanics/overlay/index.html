@@ -1,0 +1,4436 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The definitive Symphony of the Night knowledge base - bridging game lore with decompiled source code">
+      
+      
+      
+        <link rel="canonical" href="https://sotn.xee.dev/wiki/mechanics/overlay/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Overlay - SOTN Decomp Wiki</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/tokyo-night.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overlay" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SOTN Decomp Wiki" class="md-header__button md-logo" aria-label="SOTN Decomp Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 13h2v2h2v-2h2v2h2v-2h2v2h2v-5l3-3V1h2l4 2-4 2v2l3 3v12H11v-3a2 2 0 0 0-2-2 2 2 0 0 0-2 2v3H2zm16-3c-.55 0-1 .54-1 1.2V13h2v-1.8c0-.66-.45-1.2-1-1.2"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SOTN Decomp Wiki
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overlay
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Xeeynamo/sotn-decomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Xeeynamo/sotn-decomp
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../PROGRESS/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Progress
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../stages/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Stages
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../enemies/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Enemies
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../bosses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Bosses
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../items/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Items
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../characters/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Characters
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mechanics
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../speedrunning/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Speedrunning
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../decomp/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Decompilation
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../tags.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Tags
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SOTN Decomp Wiki" class="md-nav__button md-logo" aria-label="SOTN Decomp Wiki" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 13h2v2h2v-2h2v2h2v-2h2v2h2v-5l3-3V1h2l4 2-4 2v2l3 3v12H11v-3a2 2 0 0 0-2-2 2 2 0 0 0-2 2v3H2zm16-3c-.55 0-1 .54-1 1.2V13h2v-1.8c0-.66-.45-1.2-1-1.2"/></svg>
+
+    </a>
+    SOTN Decomp Wiki
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Xeeynamo/sotn-decomp" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Xeeynamo/sotn-decomp
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../stages/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stages
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normal Castle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Normal Castle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stages/normal/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    None
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reverse Castle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reverse Castle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stages/reverse/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    None
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../enemies/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enemies
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Enemies
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../bosses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bosses
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bosses
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../items/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Items
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Items
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/weapons/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Weapons
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/armor/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Armor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/accessories/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessories
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/consumables/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Consumables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../items/relics/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Relics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../characters/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Characters
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Characters
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mechanics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mechanics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../familiars/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Familiars
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../speedrunning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Speedrunning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Speedrunning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../decomp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decompilation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Decompilation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tags.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tags
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#shared-overlays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Shared Overlays
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="overlay">Overlay<a class="headerlink" href="#overlay" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Offset (PS1)</th>
+<th>Offset (PSP)</th>
+<th>Size</th>
+<th>Overlay Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1F800000</td>
+<td>⋮</td>
+<td>1F8003FF</td>
+<td>1024</td>
+</tr>
+<tr>
+<td>0x80010000</td>
+<td>⋮</td>
+<td>0x8009FFFF</td>
+<td>MAIN</td>
+</tr>
+<tr>
+<td>0x800A0000</td>
+<td>⋮</td>
+<td>0x8013BFFF</td>
+<td>DRA</td>
+</tr>
+<tr>
+<td>0x8013C000</td>
+<td>⋮</td>
+<td>0x80179FFF</td>
+<td>Player</td>
+</tr>
+<tr>
+<td>0x8017000</td>
+<td>⋮</td>
+<td>0x80179FFFF</td>
+<td>Servant</td>
+</tr>
+<tr>
+<td>0x8017A000</td>
+<td>⋮</td>
+<td>0x8017FFFF</td>
+<td>Weapon</td>
+</tr>
+<tr>
+<td>0x80180000</td>
+<td>⋮</td>
+<td>Stage</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="shared-overlays">Shared Overlays<a class="headerlink" href="#shared-overlays" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>jp10</th>
+<th>us</th>
+<th>pspeu</th>
+<th>pspeuhd</th>
+<th>ps4</th>
+<th>android</th>
+<th>androidhd</th>
+<th>xbox-jp</th>
+<th>ios</th>
+<th>ioshd</th>
+<th>xbox-world</th>
+<th>ps4hd</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sel.bin</td>
+<td>6fa5c062d8f</td>
+<td>a919a53a760</td>
+<td>38fdfe8c3e0</td>
+<td>cc8261f0bc6</td>
+<td>38fdfe8c3e0</td>
+<td>661be97f2e5</td>
+<td>cc8261f0bc6</td>
+<td>661be97f2e5</td>
+<td>cc8261f0bc6</td>
+<td>cc8261f0bc6</td>
+<td></td>
+</tr>
+<tr>
+<td>dra.bin</td>
+<td>39e3688a25b</td>
+<td>2eac5f7162e</td>
+<td>2ba697c152e</td>
+<td>ea268a06a7e</td>
+<td>2ba697c152e</td>
+<td>55c31cef42a</td>
+<td>55c31cef42a</td>
+<td>ea268a06a7e</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>weapon0.bin</td>
+<td>cf906d76b7b</td>
+<td>b8dcd64f95d</td>
+<td>cf906d76b7b</td>
+<td>cf906d76b7b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>weapon1.bin</td>
+<td>286143547a5</td>
+<td>8370dceda3a</td>
+<td>286143547a5</td>
+<td>286143547a5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ric.bin</td>
+<td>1dcd6b881e2</td>
+<td>d076912661e</td>
+<td>9fd233b8334</td>
+<td>1dcd6b881e2</td>
+<td>9fd233b8334</td>
+<td>1dcd6b881e2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>mar.bin</td>
+<td>6b31419865a</td>
+<td>4cd6c07959d</td>
+<td>95732c4d247</td>
+<td>6b31419865a</td>
+<td>95732c4d247</td>
+<td>6b31419865a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo4.bin</td>
+<td>71a9df99277</td>
+<td>b90a2a70ae9</td>
+<td>3db4548a368</td>
+<td>71a9df99277</td>
+<td>3db4548a368</td>
+<td>71a9df99277</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo3.bin</td>
+<td>c0cb9e6d120</td>
+<td>fadd860dff5</td>
+<td>9db413cd1c3</td>
+<td>c0cb9e6d120</td>
+<td>9db413cd1c3</td>
+<td>c0cb9e6d120</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo2.bin</td>
+<td>dd250a912df</td>
+<td>91d90c1ea31</td>
+<td>ecce37934f3</td>
+<td>dd250a912df</td>
+<td>ecce37934f3</td>
+<td>dd250a912df</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo5.bin</td>
+<td>346235a5ebf</td>
+<td>a90ab719a6d</td>
+<td>667db208e08</td>
+<td>346235a5ebf</td>
+<td>667db208e08</td>
+<td>346235a5ebf</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo5.bin</td>
+<td>4538f1997d9</td>
+<td>4794abe060a</td>
+<td>a5beb81a259</td>
+<td>4538f1997d9</td>
+<td>a5beb81a259</td>
+<td>4538f1997d9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo2.bin</td>
+<td>73f5fcf6149</td>
+<td>c069b9070dc</td>
+<td>ded702da90f</td>
+<td>73f5fcf6149</td>
+<td>ded702da90f</td>
+<td>73f5fcf6149</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo3.bin</td>
+<td>9b92ad9b5f8</td>
+<td>8748529fc72</td>
+<td>b2918f5a9bd</td>
+<td>9b92ad9b5f8</td>
+<td>b2918f5a9bd</td>
+<td>9b92ad9b5f8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo4.bin</td>
+<td>3c1ab7af772</td>
+<td>7626c3b20e7</td>
+<td>3d7fc28620a</td>
+<td>3c1ab7af772</td>
+<td>3d7fc28620a</td>
+<td>3c1ab7af772</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo0.bin</td>
+<td>25c9f9f40f6</td>
+<td>c9e00e7555c</td>
+<td>53b6c175fda</td>
+<td>25c9f9f40f6</td>
+<td>53b6c175fda</td>
+<td>25c9f9f40f6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo7.bin</td>
+<td>004d67920fb</td>
+<td>dba86dc3b27</td>
+<td>f08dae9c577</td>
+<td>004d67920fb</td>
+<td>f08dae9c577</td>
+<td>004d67920fb</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo6.bin</td>
+<td>59c618c7271</td>
+<td>fe067af9b7a</td>
+<td>544630b046d</td>
+<td>59c618c7271</td>
+<td>544630b046d</td>
+<td>59c618c7271</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bo1.bin</td>
+<td>abb4b7a14fa</td>
+<td>98da46f83a0</td>
+<td>5a4a01d502c</td>
+<td>abb4b7a14fa</td>
+<td>5a4a01d502c</td>
+<td>abb4b7a14fa</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo1.bin</td>
+<td>6b16c72b255</td>
+<td>c722dd07835</td>
+<td>296de47b365</td>
+<td>6b16c72b255</td>
+<td>296de47b365</td>
+<td>6b16c72b255</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo6.bin</td>
+<td>abcc0b1e183</td>
+<td>16dc7042061</td>
+<td>5fc08e04124</td>
+<td>abcc0b1e183</td>
+<td>5fc08e04124</td>
+<td>abcc0b1e183</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo8.bin</td>
+<td>a7c1a11f934</td>
+<td>6f80107a6fe</td>
+<td>40d5aed717c</td>
+<td>a7c1a11f934</td>
+<td>40d5aed717c</td>
+<td>a7c1a11f934</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo7.bin</td>
+<td>aaab00e547f</td>
+<td>9fb91b6a2f2</td>
+<td>587c25a23ba</td>
+<td>aaab00e547f</td>
+<td>587c25a23ba</td>
+<td>aaab00e547f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rbo0.bin</td>
+<td>a78f9452784</td>
+<td>9a683be60ac</td>
+<td>df0868565a3</td>
+<td>a78f9452784</td>
+<td>df0868565a3</td>
+<td>a78f9452784</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>top.bin</td>
+<td>2acbadd3535</td>
+<td>47bb1511755</td>
+<td>c18ec76648f</td>
+<td>2acbadd3535</td>
+<td>c18ec76648f</td>
+<td>2acbadd3535</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chi.bin</td>
+<td>bec5d6c5731</td>
+<td>4ea14c8b54b</td>
+<td>6d2113b9820</td>
+<td>bec5d6c5731</td>
+<td>6d2113b9820</td>
+<td>bec5d6c5731</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cat.bin</td>
+<td>c564cbfaa94</td>
+<td>02ac6d5a2cd</td>
+<td>cf9e412d9f7</td>
+<td>c564cbfaa94</td>
+<td>cf9e412d9f7</td>
+<td>c564cbfaa94</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>te5.bin</td>
+<td>40d253481f7</td>
+<td>40d253481f7</td>
+<td>60f4fb268b4</td>
+<td>60f4fb268b4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>te2.bin</td>
+<td>a8fe1466f58</td>
+<td>a8fe1466f58</td>
+<td>94edbb4e33c</td>
+<td>94edbb4e33c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rdai.bin</td>
+<td>3c40cf613fa</td>
+<td>c54bbcd0487</td>
+<td>566264407fc</td>
+<td>3c40cf613fa</td>
+<td>566264407fc</td>
+<td>3c40cf613fa</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>te3.bin</td>
+<td>dbd5c9b300a</td>
+<td>dbd5c9b300a</td>
+<td>fa2aa01c0a7</td>
+<td>fa2aa01c0a7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>te4.bin</td>
+<td>c7f643e577a</td>
+<td>c7f643e577a</td>
+<td>a615b888202</td>
+<td>a615b888202</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rnz1.bin</td>
+<td>46419a6b7d0</td>
+<td>5983e19c689</td>
+<td>0b3a09b3093</td>
+<td>46419a6b7d0</td>
+<td>0b3a09b3093</td>
+<td>46419a6b7d0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>no1.bin</td>
+<td>620c85a3e62</td>
+<td>41ccd886308</td>
+<td>7f647498c74</td>
+<td>620c85a3e62</td>
+<td>7f647498c74</td>
+<td>620c85a3e62</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rcen.bin</td>
+<td>e63b50a2698</td>
+<td>9e9316194bd</td>
+<td>58207c81d57</td>
+<td>49d64707de3</td>
+<td>58207c81d57</td>
+<td>49d64707de3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>no0.bin</td>
+<td>e40b1d8000c</td>
+<td>d07f054f9dc</td>
+<td>c52c8da8d1f</td>
+<td>e40b1d8000c</td>
+<td>c52c8da8d1f</td>
+<td>e40b1d8000c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rnz0.bin</td>
+<td>382bf523a2f</td>
+<td>d2e6eaef706</td>
+<td>56bbb04006e</td>
+<td>382bf523a2f</td>
+<td>56bbb04006e</td>
+<td>382bf523a2f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>dai.bin</td>
+<td>ac8c95d9851</td>
+<td>4189c2f709c</td>
+<td>91f0ea1eaff</td>
+<td>ac8c95d9851</td>
+<td>91f0ea1eaff</td>
+<td>ac8c95d9851</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rchi.bin</td>
+<td>207d9a05f4f</td>
+<td>82b75113cbe</td>
+<td>875ec7d773a</td>
+<td>207d9a05f4f</td>
+<td>875ec7d773a</td>
+<td>207d9a05f4f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rcat.bin</td>
+<td>61b9857a48d</td>
+<td>de0a202f1ed</td>
+<td>70114880083</td>
+<td>61b9857a48d</td>
+<td>70114880083</td>
+<td>61b9857a48d</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rtop.bin</td>
+<td>110d9d47828</td>
+<td>8796aac904d</td>
+<td>b4b18be96e5</td>
+<td>110d9d47828</td>
+<td>b4b18be96e5</td>
+<td>110d9d47828</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rno0.bin</td>
+<td>817b2956f0e</td>
+<td>125003c7fe5</td>
+<td>8150f6bd501</td>
+<td>817b2956f0e</td>
+<td>8150f6bd501</td>
+<td>817b2956f0e</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>nz0.bin</td>
+<td>8975dfb2664</td>
+<td>b10b9c2be72</td>
+<td>38da3a24e92</td>
+<td>8975dfb2664</td>
+<td>38da3a24e92</td>
+<td>8975dfb2664</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>cen.bin</td>
+<td>32698a32258</td>
+<td>42226b6d9ed</td>
+<td>5e2584e90e8</td>
+<td>32698a32258</td>
+<td>5e2584e90e8</td>
+<td>32698a32258</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>nz1.bin</td>
+<td>f527bdf23f5</td>
+<td>c0aef5c7a2c</td>
+<td>dcb6e758412</td>
+<td>f527bdf23f5</td>
+<td>dcb6e758412</td>
+<td>f527bdf23f5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rno1.bin</td>
+<td>cdac849d679</td>
+<td>5902c1f2464</td>
+<td>a788e61fc4d</td>
+<td>cdac849d679</td>
+<td>a788e61fc4d</td>
+<td>cdac849d679</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>te1.bin</td>
+<td>4f8a9325b35</td>
+<td>4f8a9325b35</td>
+<td>123fc575930</td>
+<td>123fc575930</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>mad.bin</td>
+<td>adb3303e1ea</td>
+<td>adb3303e1ea</td>
+<td>69005e79e69</td>
+<td>69005e79e69</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rare.bin</td>
+<td>31847806091</td>
+<td>08c03da5abd</td>
+<td>fa099a792be</td>
+<td>31847806091</td>
+<td>fa099a792be</td>
+<td>31847806091</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rwrp.bin</td>
+<td>da2921cbd9b</td>
+<td>3bbdd3b73f8</td>
+<td>9886b4c9eec</td>
+<td>da2921cbd9b</td>
+<td>9886b4c9eec</td>
+<td>da2921cbd9b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>no2.bin</td>
+<td>4b61c03b1d7</td>
+<td>b048fd4c782</td>
+<td>d686a707122</td>
+<td>4b61c03b1d7</td>
+<td>d686a707122</td>
+<td>4b61c03b1d7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>no3.bin</td>
+<td>615300adeca</td>
+<td>5d06216b895</td>
+<td>652e99e09bc</td>
+<td>615300adeca</td>
+<td>652e99e09bc</td>
+<td>615300adeca</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>lib.bin</td>
+<td>de60b1ee112</td>
+<td>ddd108c3a9e</td>
+<td>f45dd42ccb8</td>
+<td>de60b1ee112</td>
+<td>f45dd42ccb8</td>
+<td>de60b1ee112</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>are.bin</td>
+<td>ff81d12b5c8</td>
+<td>d1b52f3ee4c</td>
+<td>655183190ea</td>
+<td>ff81d12b5c8</td>
+<td>655183190ea</td>
+<td>ff81d12b5c8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>np3.bin</td>
+<td>d64bd3d1714</td>
+<td>7c78a2bec6a</td>
+<td>78660301541</td>
+<td>d64bd3d1714</td>
+<td>78660301541</td>
+<td>d64bd3d1714</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rno3.bin</td>
+<td>590e6787e75</td>
+<td>85c4637f3f9</td>
+<td>74a6463ef9d</td>
+<td>590e6787e75</td>
+<td>74a6463ef9d</td>
+<td>590e6787e75</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>st0.bin</td>
+<td>ec85aa183ee</td>
+<td>bc2fabbe5ef</td>
+<td>f40689641ed</td>
+<td>ec85aa183ee</td>
+<td>f40689641ed</td>
+<td>ec85aa183ee</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rlib.bin</td>
+<td>b640a4c3954</td>
+<td>2fe82faf41b</td>
+<td>d60612b1b37</td>
+<td>b640a4c3954</td>
+<td>d60612b1b37</td>
+<td>b640a4c3954</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>wrp.bin</td>
+<td>3ae1425d694</td>
+<td>2ae313f4e39</td>
+<td>0584ddb3ba1</td>
+<td>3ae1425d694</td>
+<td>0584ddb3ba1</td>
+<td>3ae1425d694</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>rno2.bin</td>
+<td>4ebd602483a</td>
+<td>e92dc877e03</td>
+<td>9e7644ecee7</td>
+<td>4ebd602483a</td>
+<td>9e7644ecee7</td>
+<td>4ebd602483a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_005.bin</td>
+<td>b36f6c1868d</td>
+<td>099f856927f</td>
+<td>3791c486abc</td>
+<td>5745db61da5</td>
+<td>3791c486abc</td>
+<td>5745db61da5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_004.bin</td>
+<td>75550598398</td>
+<td>0f2ff898829</td>
+<td>af1153efd05</td>
+<td>6273cf5f305</td>
+<td>af1153efd05</td>
+<td>6273cf5f305</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_006.bin</td>
+<td>5e82e79a095</td>
+<td>88a4a391c25</td>
+<td>77fd3f03859</td>
+<td>2333d1cfd55</td>
+<td>77fd3f03859</td>
+<td>2333d1cfd55</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_003.bin</td>
+<td>8bbc6e71cbc</td>
+<td>b54466dec39</td>
+<td>ca15c105a7c</td>
+<td>b9c692be18a</td>
+<td>ca15c105a7c</td>
+<td>b9c692be18a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_002.bin</td>
+<td>38dc079a8cb</td>
+<td>4589bb04fe4</td>
+<td>fd55d945a58</td>
+<td>22d2d7f9dbf</td>
+<td>fd55d945a58</td>
+<td>22d2d7f9dbf</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_000.bin</td>
+<td>d4b7058638c</td>
+<td>82dd4ae1c4e</td>
+<td>c8c34ac1d46</td>
+<td>2253aee1338</td>
+<td>c8c34ac1d46</td>
+<td>2253aee1338</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_001.bin</td>
+<td>7f51edb75ef</td>
+<td>326c9d2f9b9</td>
+<td>0e75ffe97e2</td>
+<td>13915092df7</td>
+<td>0e75ffe97e2</td>
+<td>13915092df7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_009.bin</td>
+<td>41315d4c9b7</td>
+<td>2fecbd9c7d4</td>
+<td>41315d4c9b7</td>
+<td>2fecbd9c7d4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_101.bin</td>
+<td>7f51edb75ef</td>
+<td>7f51edb75ef</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_040.bin</td>
+<td>e904600be31</td>
+<td>2df7199f63c</td>
+<td>e904600be31</td>
+<td>2df7199f63c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_011.bin</td>
+<td>cd89a75b94a</td>
+<td>ad5484b6bf0</td>
+<td>cd89a75b94a</td>
+<td>ad5484b6bf0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_010.bin</td>
+<td>c8a0a278463</td>
+<td>cf0fc7d68bf</td>
+<td>c8a0a278463</td>
+<td>cf0fc7d68bf</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_002.bin</td>
+<td>00d28637e37</td>
+<td>53aac48865c</td>
+<td>00d28637e37</td>
+<td>53aac48865c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_047.bin</td>
+<td>536f0006774</td>
+<td>fb3c312f370</td>
+<td>536f0006774</td>
+<td>fb3c312f370</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_043.bin</td>
+<td>c8138e78864</td>
+<td>b79522d7849</td>
+<td>c8138e78864</td>
+<td>b79522d7849</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_105.bin</td>
+<td>b36f6c1868d</td>
+<td>b36f6c1868d</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_051.bin</td>
+<td>63e760bafe4</td>
+<td>451d7b439e7</td>
+<td>63e760bafe4</td>
+<td>451d7b439e7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_016.bin</td>
+<td>8228b6f679b</td>
+<td>7d341cc06cd</td>
+<td>8228b6f679b</td>
+<td>7d341cc06cd</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_025.bin</td>
+<td>6f08e2f0e12</td>
+<td>05d5c65cd55</td>
+<td>6f08e2f0e12</td>
+<td>05d5c65cd55</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_029.bin</td>
+<td>254f0f226bf</td>
+<td>1125412d04b</td>
+<td>254f0f226bf</td>
+<td>1125412d04b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_055.bin</td>
+<td>e49f228a5e2</td>
+<td>564d722cad8</td>
+<td>e49f228a5e2</td>
+<td>564d722cad8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_004.bin</td>
+<td>7d3ef5241cf</td>
+<td>b61d9b28c99</td>
+<td>7d3ef5241cf</td>
+<td>b61d9b28c99</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_022.bin</td>
+<td>189b3d76a9e</td>
+<td>113ba0c8afb</td>
+<td>189b3d76a9e</td>
+<td>113ba0c8afb</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_019.bin</td>
+<td>6024d2b50f5</td>
+<td>3f8e8401800</td>
+<td>6024d2b50f5</td>
+<td>3f8e8401800</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_052.bin</td>
+<td>55229fffcfd</td>
+<td>0416645a0a7</td>
+<td>55229fffcfd</td>
+<td>0416645a0a7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_034.bin</td>
+<td>14ca122909b</td>
+<td>c661332cfdb</td>
+<td>14ca122909b</td>
+<td>c661332cfdb</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_042.bin</td>
+<td>1f59181df20</td>
+<td>7f52d828b6b</td>
+<td>1f59181df20</td>
+<td>7f52d828b6b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_014.bin</td>
+<td>af58e6976b9</td>
+<td>13cbdf0959d</td>
+<td>af58e6976b9</td>
+<td>13cbdf0959d</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_039.bin</td>
+<td>83825c26d13</td>
+<td>d1bc89dec0b</td>
+<td>83825c26d13</td>
+<td>d1bc89dec0b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_000.bin</td>
+<td>bc20b268349</td>
+<td>82aa0e2d2b3</td>
+<td>bc20b268349</td>
+<td>82aa0e2d2b3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_052.bin</td>
+<td>f3f7935a958</td>
+<td>988790571e7</td>
+<td>f3f7935a958</td>
+<td>988790571e7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_050.bin</td>
+<td>8d1da76385c</td>
+<td>6a1e874f5d5</td>
+<td>8d1da76385c</td>
+<td>6a1e874f5d5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_058.bin</td>
+<td>40aee22313e</td>
+<td>c72ee0c20e4</td>
+<td>40aee22313e</td>
+<td>c72ee0c20e4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_028.bin</td>
+<td>5529d97da1a</td>
+<td>d4be515ec0b</td>
+<td>5529d97da1a</td>
+<td>d4be515ec0b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_010.bin</td>
+<td>0dafa75c98a</td>
+<td>732eb5bb749</td>
+<td>0dafa75c98a</td>
+<td>732eb5bb749</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_053.bin</td>
+<td>7ebf1e8ae7e</td>
+<td>fa444f086ca</td>
+<td>7ebf1e8ae7e</td>
+<td>fa444f086ca</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_030.bin</td>
+<td>3c6e4e52104</td>
+<td>659107c3651</td>
+<td>3c6e4e52104</td>
+<td>659107c3651</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_039.bin</td>
+<td>5161aa4a4a0</td>
+<td>5e2d40b6281</td>
+<td>5161aa4a4a0</td>
+<td>5e2d40b6281</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_103.bin</td>
+<td>b36f6c1868d</td>
+<td>b36f6c1868d</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_003.bin</td>
+<td>9f11346ed9f</td>
+<td>0094995429c</td>
+<td>9f11346ed9f</td>
+<td>0094995429c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_007.bin</td>
+<td>107057d6d69</td>
+<td>4e67c318ac2</td>
+<td>107057d6d69</td>
+<td>4e67c318ac2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_020.bin</td>
+<td>aea288cdf6b</td>
+<td>807d0d472ca</td>
+<td>aea288cdf6b</td>
+<td>807d0d472ca</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_055.bin</td>
+<td>ad2b4b3095f</td>
+<td>af64d17cec8</td>
+<td>ad2b4b3095f</td>
+<td>af64d17cec8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_042.bin</td>
+<td>0c4d611b0be</td>
+<td>0e22aa00db7</td>
+<td>0c4d611b0be</td>
+<td>0e22aa00db7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_043.bin</td>
+<td>89dc5832720</td>
+<td>783be68bdee</td>
+<td>89dc5832720</td>
+<td>783be68bdee</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_057.bin</td>
+<td>bd41215999e</td>
+<td>caf050d70fd</td>
+<td>bd41215999e</td>
+<td>caf050d70fd</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_016.bin</td>
+<td>d946c92c808</td>
+<td>85db7628988</td>
+<td>d946c92c808</td>
+<td>85db7628988</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_054.bin</td>
+<td>e29222a9178</td>
+<td>4e0b0e3ab37</td>
+<td>e29222a9178</td>
+<td>4e0b0e3ab37</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_013.bin</td>
+<td>c1785101603</td>
+<td>679479f3d06</td>
+<td>c1785101603</td>
+<td>679479f3d06</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_046.bin</td>
+<td>f124a8d270e</td>
+<td>1482e775aa1</td>
+<td>f124a8d270e</td>
+<td>1482e775aa1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_036.bin</td>
+<td>3bd35bce95d</td>
+<td>d587bdf611b</td>
+<td>3bd35bce95d</td>
+<td>d587bdf611b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_011.bin</td>
+<td>3d6c0a8abae</td>
+<td>ba06eb77b8f</td>
+<td>3d6c0a8abae</td>
+<td>ba06eb77b8f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_050.bin</td>
+<td>8ab2b6da070</td>
+<td>02d752c191f</td>
+<td>8ab2b6da070</td>
+<td>02d752c191f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_023.bin</td>
+<td>ca428edfab4</td>
+<td>66afb00121a</td>
+<td>ca428edfab4</td>
+<td>66afb00121a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_001.bin</td>
+<td>b02e4c83a2f</td>
+<td>d51c9dcc92f</td>
+<td>b02e4c83a2f</td>
+<td>d51c9dcc92f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_057.bin</td>
+<td>e8e192ce5c3</td>
+<td>86440727b70</td>
+<td>e8e192ce5c3</td>
+<td>86440727b70</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_009.bin</td>
+<td>670d5c9a2a4</td>
+<td>68a4d7e9c3e</td>
+<td>670d5c9a2a4</td>
+<td>68a4d7e9c3e</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_058.bin</td>
+<td>c675848615c</td>
+<td>c91d49c0e0e</td>
+<td>c675848615c</td>
+<td>c91d49c0e0e</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_032.bin</td>
+<td>cdff55e6fd1</td>
+<td>c96fcfabcf8</td>
+<td>cdff55e6fd1</td>
+<td>c96fcfabcf8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_056.bin</td>
+<td>16676336a76</td>
+<td>3d8e900fb53</td>
+<td>16676336a76</td>
+<td>3d8e900fb53</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_037.bin</td>
+<td>9117bdcced0</td>
+<td>11b04dbc8ff</td>
+<td>9117bdcced0</td>
+<td>11b04dbc8ff</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_054.bin</td>
+<td>1f6216d0e1f</td>
+<td>75a3fe86ab1</td>
+<td>1f6216d0e1f</td>
+<td>75a3fe86ab1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_033.bin</td>
+<td>603c72feb60</td>
+<td>503ff4c9b17</td>
+<td>603c72feb60</td>
+<td>503ff4c9b17</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_012.bin</td>
+<td>1ab14683c75</td>
+<td>fc4e77c6102</td>
+<td>1ab14683c75</td>
+<td>fc4e77c6102</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_002.bin</td>
+<td>db29446c252</td>
+<td>99bb720e2c3</td>
+<td>db29446c252</td>
+<td>99bb720e2c3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_036.bin</td>
+<td>9e1ded28b0c</td>
+<td>5adc3ba3287</td>
+<td>9e1ded28b0c</td>
+<td>5adc3ba3287</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_018.bin</td>
+<td>4f704060783</td>
+<td>75899fd322a</td>
+<td>4f704060783</td>
+<td>75899fd322a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_032.bin</td>
+<td>c65fdaa2556</td>
+<td>b29ac5bb819</td>
+<td>c65fdaa2556</td>
+<td>b29ac5bb819</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_005.bin</td>
+<td>d8705ba0c52</td>
+<td>6941d4c170c</td>
+<td>d8705ba0c52</td>
+<td>6941d4c170c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_031.bin</td>
+<td>2eb14a149e2</td>
+<td>3707e1ef242</td>
+<td>2eb14a149e2</td>
+<td>3707e1ef242</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_038.bin</td>
+<td>1e4fe4da320</td>
+<td>f72e164bb9f</td>
+<td>1e4fe4da320</td>
+<td>f72e164bb9f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_027.bin</td>
+<td>2700758180f</td>
+<td>2611027e222</td>
+<td>2700758180f</td>
+<td>2611027e222</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_028.bin</td>
+<td>6bbd13fe388</td>
+<td>2aace93e426</td>
+<td>6bbd13fe388</td>
+<td>2aace93e426</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_024.bin</td>
+<td>58803b5b12b</td>
+<td>0665a9731be</td>
+<td>58803b5b12b</td>
+<td>0665a9731be</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_030.bin</td>
+<td>316a6f7556d</td>
+<td>3aa1142a57d</td>
+<td>316a6f7556d</td>
+<td>3aa1142a57d</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_027.bin</td>
+<td>6128471a1e7</td>
+<td>fa9781b2ce4</td>
+<td>6128471a1e7</td>
+<td>fa9781b2ce4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_023.bin</td>
+<td>05d9f9e7d45</td>
+<td>89a3459ec96</td>
+<td>05d9f9e7d45</td>
+<td>89a3459ec96</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_040.bin</td>
+<td>43145c12298</td>
+<td>8f69aa0dfdb</td>
+<td>43145c12298</td>
+<td>8f69aa0dfdb</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_026.bin</td>
+<td>0cb1bab818a</td>
+<td>b85dc47d5a6</td>
+<td>0cb1bab818a</td>
+<td>b85dc47d5a6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_056.bin</td>
+<td>353023d67c1</td>
+<td>b0cb3234a97</td>
+<td>353023d67c1</td>
+<td>b0cb3234a97</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_012.bin</td>
+<td>eab66ff03cd</td>
+<td>33f47ea8051</td>
+<td>eab66ff03cd</td>
+<td>33f47ea8051</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_049.bin</td>
+<td>0ed1ac65f21</td>
+<td>f60f913532a</td>
+<td>0ed1ac65f21</td>
+<td>f60f913532a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_034.bin</td>
+<td>ed46c2132f2</td>
+<td>05023041869</td>
+<td>ed46c2132f2</td>
+<td>05023041869</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_021.bin</td>
+<td>bffec9ced8d</td>
+<td>ce65a71a6c2</td>
+<td>bffec9ced8d</td>
+<td>ce65a71a6c2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_045.bin</td>
+<td>f3035625dde</td>
+<td>4d1c7809625</td>
+<td>f3035625dde</td>
+<td>4d1c7809625</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_029.bin</td>
+<td>50865665e16</td>
+<td>a8ba5c809f8</td>
+<td>50865665e16</td>
+<td>a8ba5c809f8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_024.bin</td>
+<td>d0400c9d976</td>
+<td>f95640532bd</td>
+<td>d0400c9d976</td>
+<td>f95640532bd</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_007.bin</td>
+<td>4dfb9d1b126</td>
+<td>2b566335de0</td>
+<td>4dfb9d1b126</td>
+<td>2b566335de0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_033.bin</td>
+<td>e19297e9390</td>
+<td>a464b10fe50</td>
+<td>e19297e9390</td>
+<td>a464b10fe50</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_017.bin</td>
+<td>39ddab0c4d7</td>
+<td>ee556e4f4c0</td>
+<td>39ddab0c4d7</td>
+<td>ee556e4f4c0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_017.bin</td>
+<td>6ea19e525db</td>
+<td>9432b2dcae2</td>
+<td>6ea19e525db</td>
+<td>9432b2dcae2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_106.bin</td>
+<td>5e82e79a095</td>
+<td>5e82e79a095</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_047.bin</td>
+<td>72929ce63ca</td>
+<td>7c7ad710de4</td>
+<td>72929ce63ca</td>
+<td>7c7ad710de4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_037.bin</td>
+<td>dc109d14b7e</td>
+<td>1a4b0084f3c</td>
+<td>dc109d14b7e</td>
+<td>1a4b0084f3c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_026.bin</td>
+<td>36c98c94608</td>
+<td>b981872cefe</td>
+<td>36c98c94608</td>
+<td>b981872cefe</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_006.bin</td>
+<td>33e52de8359</td>
+<td>de98f1b9edf</td>
+<td>33e52de8359</td>
+<td>de98f1b9edf</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_031.bin</td>
+<td>0f661dce004</td>
+<td>7d0888b46c1</td>
+<td>0f661dce004</td>
+<td>7d0888b46c1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_051.bin</td>
+<td>3c78db6870f</td>
+<td>de75fa53ae3</td>
+<td>3c78db6870f</td>
+<td>de75fa53ae3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_049.bin</td>
+<td>1e54893ba24</td>
+<td>cb3a7448c78</td>
+<td>1e54893ba24</td>
+<td>cb3a7448c78</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_001.bin</td>
+<td>2732de6c06e</td>
+<td>c2f043f55fb</td>
+<td>2732de6c06e</td>
+<td>c2f043f55fb</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_035.bin</td>
+<td>d256dcf397d</td>
+<td>6ec623cb5b3</td>
+<td>d256dcf397d</td>
+<td>6ec623cb5b3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_044.bin</td>
+<td>7d7edee57c2</td>
+<td>d563af2fb76</td>
+<td>7d7edee57c2</td>
+<td>d563af2fb76</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_102.bin</td>
+<td>b36f6c1868d</td>
+<td>b36f6c1868d</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_015.bin</td>
+<td>6f828a9209e</td>
+<td>53a3d92eb11</td>
+<td>6f828a9209e</td>
+<td>53a3d92eb11</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_013.bin</td>
+<td>1a2e05d8f33</td>
+<td>1bd4e5808bf</td>
+<td>1a2e05d8f33</td>
+<td>1bd4e5808bf</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_020.bin</td>
+<td>47e47b0aa17</td>
+<td>747a104fa4f</td>
+<td>47e47b0aa17</td>
+<td>747a104fa4f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_004.bin</td>
+<td>1ac8508664f</td>
+<td>45b6306b107</td>
+<td>1ac8508664f</td>
+<td>45b6306b107</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_041.bin</td>
+<td>26111b15760</td>
+<td>dc10523cfa3</td>
+<td>26111b15760</td>
+<td>dc10523cfa3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_018.bin</td>
+<td>b4bcb0fe53a</td>
+<td>52674a397ef</td>
+<td>b4bcb0fe53a</td>
+<td>52674a397ef</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_021.bin</td>
+<td>4bd9b37cec9</td>
+<td>ea19380a13f</td>
+<td>4bd9b37cec9</td>
+<td>ea19380a13f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_035.bin</td>
+<td>44dbba68965</td>
+<td>844463cf886</td>
+<td>44dbba68965</td>
+<td>844463cf886</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_048.bin</td>
+<td>7b8fb638dea</td>
+<td>7394fa7ecfd</td>
+<td>7b8fb638dea</td>
+<td>7394fa7ecfd</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_025.bin</td>
+<td>d8d65441cc2</td>
+<td>bc4e77f490c</td>
+<td>d8d65441cc2</td>
+<td>bc4e77f490c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_005.bin</td>
+<td>926bcd3647f</td>
+<td>e5a879738c1</td>
+<td>926bcd3647f</td>
+<td>e5a879738c1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_008.bin</td>
+<td>ec8705403aa</td>
+<td>f096a03aa57</td>
+<td>ec8705403aa</td>
+<td>f096a03aa57</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_046.bin</td>
+<td>3d46c589dc8</td>
+<td>1676650f314</td>
+<td>3d46c589dc8</td>
+<td>1676650f314</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_038.bin</td>
+<td>d7c176bb7d2</td>
+<td>21a050f025a</td>
+<td>d7c176bb7d2</td>
+<td>21a050f025a</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_045.bin</td>
+<td>1329fd3135e</td>
+<td>d4a48fcc7cf</td>
+<td>1329fd3135e</td>
+<td>d4a48fcc7cf</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_000.bin</td>
+<td>ae247d10da2</td>
+<td>8eb41cfdaa1</td>
+<td>ae247d10da2</td>
+<td>8eb41cfdaa1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_003.bin</td>
+<td>31ba39171e7</td>
+<td>02b38de60b5</td>
+<td>31ba39171e7</td>
+<td>02b38de60b5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_053.bin</td>
+<td>aeca2ee645c</td>
+<td>5de44d2040b</td>
+<td>aeca2ee645c</td>
+<td>5de44d2040b</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_022.bin</td>
+<td>485be525b95</td>
+<td>023b127efc8</td>
+<td>485be525b95</td>
+<td>023b127efc8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_041.bin</td>
+<td>474d904cba4</td>
+<td>d3b7829ed1f</td>
+<td>474d904cba4</td>
+<td>d3b7829ed1f</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_008.bin</td>
+<td>e0cc4b0abfb</td>
+<td>5b19346fcfa</td>
+<td>e0cc4b0abfb</td>
+<td>5b19346fcfa</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_014.bin</td>
+<td>d7f85d89ecf</td>
+<td>3f85e62bd62</td>
+<td>d7f85d89ecf</td>
+<td>3f85e62bd62</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_019.bin</td>
+<td>cddf48fbcad</td>
+<td>55e8ed898ec</td>
+<td>cddf48fbcad</td>
+<td>55e8ed898ec</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_015.bin</td>
+<td>6fc65f104dc</td>
+<td>312019751e4</td>
+<td>6fc65f104dc</td>
+<td>312019751e4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_006.bin</td>
+<td>98e7cf4a0e5</td>
+<td>40b8d7d1db0</td>
+<td>98e7cf4a0e5</td>
+<td>40b8d7d1db0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_104.bin</td>
+<td>75550598398</td>
+<td>75550598398</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w1_044.bin</td>
+<td>8cce5f1412d</td>
+<td>b3c5f183ed0</td>
+<td>8cce5f1412d</td>
+<td>b3c5f183ed0</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tt_100.bin</td>
+<td>d4b7058638c</td>
+<td>d4b7058638c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>w0_048.bin</td>
+<td>82db2ac8486</td>
+<td>5a9c7ca511c</td>
+<td>82db2ac8486</td>
+<td>5a9c7ca511c</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>maria.bin</td>
+<td>d50f2c928f7</td>
+<td>d50f2c928f7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>boot.bin</td>
+<td>256da5c56df</td>
+<td>256da5c56df</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Xeeynamo/sotn-decomp" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://sotn-discord.xee.dev/" target="_blank" rel="noopener" title="sotn-discord.xee.dev" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
