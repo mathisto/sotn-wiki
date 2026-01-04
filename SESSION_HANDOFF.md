@@ -1,80 +1,110 @@
-# SOTN Wiki Scraping - Session Handoff
+# SOTN Wiki - Phase 3 Handoff
 
-**Date**: 2026-01-03
-**Status**: 47/100+ pages scraped
+**Date**: 2026-01-04
+**Status**: Phase 1-2 Complete, Phase 3 Ready
 
 ## Continuation Prompt
 
 ```
-Continue SOTN wiki scraping project in .dev/wiki/
+Continue SOTN Wiki Phase 3: Fandom scraping (150+ pages)
 
 CONTEXT:
-- 47 markdown pages already scraped and saved
-- Infrastructure ready: .dev/wiki/ structure, SCRAPING_PLAN.md, OpenMemory entries, SQLite artifact
-- Using 5 free delegation models in parallel: /grok, /big-pickle, /gpt, /gemini, /zai
-- Strategy: 5 scrapers at a time, one per model to avoid rate limits
+- Wiki location: /Users/mathisto/projects/sotn-wiki/
+- Live site: https://mathisto.github.io/sotn-wiki/
+- MkDocs with Material theme (Tokyo Night dark), GitHub Actions deploy
+- Using librarian agents in parallel for scraping
 
-COMPLETED:
-- All GitHub Wiki decomp pages (18 files in decomp/)
-- Core game mechanics (RNG, glitches, familiars, stages)
-- Speedrunning overview + techniques
-- 20 castle locations (both Normal and Reverse Castle)
+COMPLETED (Phases 1-2):
+- 23 decomp pages from GitHub Wiki (docs/decomp/)
+- 21 game/speedrunning pages from sotn.fun (docs/characters/, docs/mechanics/, docs/speedrunning/)
+- Theme fixed: slate scheme with Tokyo Night CSS
+- GitHub Actions workflow for auto-deploy
+- All files in docs/ directory (MkDocs structure)
 
-REMAINING HIGH-PRIORITY:
-1. Reverse Castle locations: Reverse Outer Wall, Reverse Clock Tower, Reverse Entrance, Cave, Reverse Colosseum
-2. Saturn-exclusive: Underground Garden, Cursed Prison, Hell Garden, Soul Prison
-3. Characters: Richter, Maria, Death, Shaft, Dracula (Fandom)
-4. Bosses: Individual boss pages with strategies
+PHASE 3 TARGETS (Castlevania Fandom):
+Base URL: https://castlevania.fandom.com/wiki/
 
-REMAINING MEDIUM-PRIORITY:
-1. sotn.fun pages as they get populated (many are stubs)
-2. Enemy bestiary pages
-3. Item/equipment pages
+1. CHARACTERS (~10 pages):
+   - Alucard, Maria_Renard, Richter_Belmont, Dracula, Death, Shaft
+   - Lisa, Succubus, Librarian
+   → Write to: docs/characters/
 
-HOW TO CONTINUE:
-1. Check .dev/wiki/SCRAPING_PLAN.md for full inventory
-2. Fire 5 parallel scrapers using Task tool with /grok, /big-pickle, /gpt, /gemini, /zai
-3. Save results to appropriate .dev/wiki/ paths
-4. Some Fandom pages hit Cloudflare - try alternative URLs or skip
+2. LOCATIONS (~20 pages):
+   - All castle areas not yet covered
+   - Saturn-exclusive: Underground_Garden, Cursed_Prison, Hell_Garden, Soul_Prison
+   → Write to: docs/locations/
 
-NOTES:
-- Fandom occasionally blocks webfetch (Cloudflare) - ~20% failure rate
-- sotn.fun wiki is sparse - many pages are stubs
-- GitHub Wiki pages are comprehensive and reliable
+3. BOSSES (~20 pages):
+   - Slogra, Gaibon, Doppleganger, Hippogryph, Beelzebub, etc.
+   → Write to: docs/bosses/
+
+4. ENEMIES (~100+ pages):
+   - Full bestiary from Fandom
+   → Write to: docs/enemies/
+
+5. ITEMS (~50+ pages):
+   - Weapons, armor, accessories, consumables, relics
+   → Write to: docs/items/
+
+DELEGATION STRATEGY:
+- Use 5 parallel librarian agents (call_omo_agent with run_in_background=true)
+- Each batch: 5-10 pages
+- Fandom has ~20% Cloudflare block rate - note failures for retry
+
+SCRAPING FORMAT:
+- Add YAML frontmatter: ---\ntitle: "Page Title"\n---
+- Clean markdown (no nav cruft)
+- Preserve tables, stats, descriptions
+
+KNOWN ISSUES:
+- "quicklinks" page reported unformatted - user to provide URL
+- Some Fandom pages hit Cloudflare - retry or skip
+
+FILES TO CHECK:
+- docs/PROGRESS.md - update with Phase 3 tracking
+- SCRAPING_PLAN.md - has full page inventory
 ```
 
-## Files Structure
+## Project Structure
 
 ```
-.dev/wiki/
-├── decomp/           # 18 technical decomp docs
-├── game/
-│   ├── characters/   # 1 file (alucard.md)
-│   ├── locations/    # 20 castle area files
-│   └── mechanics/    # 6 files (rng, glitches, etc.)
-├── speedrunning/     # 2 files
-├── README.md
-├── SCRAPING_PLAN.md  # Full page inventory with checkboxes
-└── SESSION_HANDOFF.md # This file
+/Users/mathisto/projects/sotn-wiki/
+├── docs/                    # MkDocs source (ALL content here)
+│   ├── index.md            # Homepage with card grid
+│   ├── decomp/             # 23 technical docs ✅
+│   ├── characters/         # 4 files ✅
+│   ├── mechanics/          # 13 files ✅
+│   ├── speedrunning/       # 4 files ✅
+│   ├── bosses/             # Stub pages (Phase 3)
+│   ├── enemies/            # Stub pages (Phase 3)
+│   ├── items/              # Stub pages (Phase 3)
+│   ├── locations/          # Some content (Phase 3)
+│   └── stages/             # Normal + Reverse castle
+├── .github/workflows/deploy.yml  # Auto-deploy on push
+├── mkdocs.yml              # Theme: Material + slate + Tokyo Night CSS
+├── SCRAPING_PLAN.md        # Full inventory
+└── SESSION_HANDOFF.md      # This file
 ```
-
-## Reference Resources
-
-| Resource | URL | Status |
-|----------|-----|--------|
-| GitHub Wiki | https://github.com/Xeeynamo/sotn-decomp/wiki/ | ✅ Mostly scraped |
-| Progress Tracker | https://sotn.xee.dev/ | Bookmarked (JS-only) |
-| sotn.fun Wiki | https://www.sotn.fun/wiki/ | Partially scraped |
-| Castlevania Fandom | https://castlevania.fandom.com/ | Partially scraped |
 
 ## Delegation Commands
 
-```bash
-/grok <task>        # Free Grok model
-/big-pickle <task>  # Free Big Pickle model  
-/gpt <task>         # GPT-4o-mini
-/gemini <task>      # Gemini 2.5 Flash
-/zai <task>         # GLM 4.5 Flash
+```python
+# Fire 5 parallel librarian agents:
+call_omo_agent(
+    subagent_type="librarian",
+    description="Fandom Batch N: Category",
+    prompt="TASK: Fetch N pages from Fandom...",
+    run_in_background=True
+)
+
+# Collect results:
+background_output(task_id="bg_xxxxx")
 ```
 
-All 5 can run in parallel without rate limiting each other.
+## Session Stats
+
+| Phase | Source | Pages | Status |
+|-------|--------|-------|--------|
+| Phase 1 | GitHub Wiki | 23 | ✅ Complete |
+| Phase 2 | sotn.fun | 21 | ✅ Complete |
+| Phase 3 | Fandom | 150+ | ⏳ Ready |
